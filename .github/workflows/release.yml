@@ -5,6 +5,7 @@ on:
       - main
 env:
   RUST_VERSION: 1.76.0
+  RELEASE_LEVEL: patch
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -26,6 +27,7 @@ jobs:
       - name: Install cargo-release
         run: cargo install cargo-release --locked
       - name: Run cargo release
-        run: cargo release ${RELEASE_LEVEL}
-        env:
-          RELEASE_LEVEL: "patch" # Set to "patch", "minor", or "major" depending on the desired version bump
+        run: |
+          cargo release version --execute --no-confirm ${{ env.RELEASE_LEVEL }}
+          cargo release commit --execute --no-confirm ${{ env.RELEASE_LEVEL }}
+          git push
