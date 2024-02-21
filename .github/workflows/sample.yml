@@ -5,6 +5,8 @@ on:
       - main
 jobs:
   calculate:
+    runs-on: ubuntu-latest
+    steps:
       - name: Run cargo release
         run: |
           LATEST_COMMIT_UNIX_TIME=$(git log -1 --format=%ct -- src)
