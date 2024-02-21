@@ -1,0 +1,19 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the source code
+        uses: actions/checkout@v3
+      - name: Set up Rust
+        uses: actions/setup-rust@v1
+      - name: Install cargo-release
+        run: cargo install cargo-release --locked
+      - name: Run cargo release
+        run: cargo release ${RELEASE_LEVEL}
+        env:
+          RELEASE_LEVEL: "patch" # Set to "patch", "minor", or "major" depending on the desired version bump
