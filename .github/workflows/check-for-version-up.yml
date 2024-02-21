@@ -22,12 +22,12 @@ jobs:
           CUREENT_TIME=$(date +%s)
           echo "Latest: $LATEST_COMMIT_UNIX_TIME"
           echo "Current: $CUREENT_TIME"
-          DIFF=$((CUREENT_TIME - $LATEST_COMMIT_UNIX_TIME))
+          DIFF=$((CUREENT_TIME - LATEST_COMMIT_UNIX_TIME))
           echo "Diff: $DIFF"
           echo "interval: ${{ env.INTERVEL_SEC }}"
           IS_EXIST_NEW_COMMIT=$((CUREENT_TIME - ${{ env.INTERVEL_SEC }} - $LATEST_COMMIT_UNIX_TIME < 0))
           echo "Is exist new commit?: $IS_EXIST_NEW_COMMIT"
-          run: echo "is_exist_new_commit=$IS_EXIST_NEW_COMMIT" >> $GITHUB_OUTPUT
+          echo "is_exist_new_commit=$IS_EXIST_NEW_COMMIT" >> $GITHUB_OUTPUT
       - name: if check flag is true, then exit
         if: ${{ steps.check.outputs.is_exist_new_commit != '0' }}
         run: echo "There is new commit"
