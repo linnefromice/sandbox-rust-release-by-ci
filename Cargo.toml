@@ -1,6 +1,6 @@
 [package]
 name = "sandbox-rust-release-by-ci"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["linnefromice <linnefromice@gmail.com>"]
 description = "A sample Rust project for demonstrating CI-based release workflow"
 license = "MIT"
