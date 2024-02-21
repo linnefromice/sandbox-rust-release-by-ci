@@ -28,6 +28,13 @@ jobs:
           IS_EXIST_NEW_COMMIT=$((CUREENT_TIME - ${{ env.INTERVEL_SEC }} - $LATEST_COMMIT_UNIX_TIME < 0))
           echo "Is exist new commit?: $IS_EXIST_NEW_COMMIT"
           echo "is_exist_new_commit=$IS_EXIST_NEW_COMMIT" >> $GITHUB_OUTPUT
-      - name: if check flag is true, then exit
+      - name: if check flag is true, request to update
         if: ${{ steps.check.outputs.is_exist_new_commit != '0' }}
-        run: echo "There is new commit"
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
+        with:
+          owner: ${{ github.repository.owner }}
+          repo: sandbox-rust-release-by-ci
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow_file_name: trigger_showcase_wf.yml
+
+
