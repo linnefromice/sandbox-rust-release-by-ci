@@ -12,6 +12,7 @@ jobs:
       - name: Run cargo release
         run: |
           LATEST_COMMIT=$(git log -1 -- src)
+          ls -la
           echo "Latest Commit: $LATEST_COMMIT"
           LATEST_COMMIT_UNIX_TIME=$(git log -1 --format=%ct -- src)
           CUREENT_TIME=$(date +%s)
