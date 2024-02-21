@@ -15,7 +15,7 @@ jobs:
           CUREENT_TIME=$(date +%s)
           echo "Latest: $LATEST_COMMIT_UNIX_TIME"
           echo "Current: $CUREENT_TIME"
-          DIFF=$($CUREENT_TIME - $LATEST_COMMIT_UNIX_TIME)
+          DIFF=$((CUREENT_TIME - $LATEST_COMMIT_UNIX_TIME))
           echo "Diff: $DIFF"
-          IS_EXIST_NEW_COMMIT=$($CUREENT_TIME - 86400 - $LATEST_COMMIT_UNIX_TIME < 0)
+          IS_EXIST_NEW_COMMIT=$((CUREENT_TIME - 86400 - $LATEST_COMMIT_UNIX_TIME < 0))
           echo "Is exist new commit?: $IS_EXIST_NEW_COMMIT"
