@@ -29,5 +29,5 @@ jobs:
       - name: Run cargo release
         run: |
           cargo release version --execute --no-confirm ${{ env.RELEASE_LEVEL }}
-          cargo release commit --execute --no-confirm ${{ env.RELEASE_LEVEL }}
+          cargo release commit --execute --no-confirm
           git push
