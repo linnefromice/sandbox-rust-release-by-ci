@@ -1,20 +1,22 @@
-name: Sample
+name: Check for Version up
 on:
   push:
     branches:
       - main
+env:
+  INTERVEL_SEC: 3600
 jobs:
-  calculate:
+  check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the source code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Run cargo release
+      - name: Check for updates
+        id: check
         run: |
           LATEST_COMMIT=$(git log -1 -- src)
-          ls -la
           echo "Latest Commit: $LATEST_COMMIT"
           LATEST_COMMIT_UNIX_TIME=$(git log -1 --format=%ct -- src)
           CUREENT_TIME=$(date +%s)
@@ -22,5 +24,16 @@ jobs:
           echo "Current: $CUREENT_TIME"
           DIFF=$((CUREENT_TIME - $LATEST_COMMIT_UNIX_TIME))
           echo "Diff: $DIFF"
-          IS_EXIST_NEW_COMMIT=$((CUREENT_TIME - 3600 - $LATEST_COMMIT_UNIX_TIME < 0))
+          echo "interval: $INTERVAL_SEC"
+          IS_EXIST_NEW_COMMIT=$((CUREENT_TIME - $INTERVAL_SEC - $LATEST_COMMIT_UNIX_TIME < 0))
           echo "Is exist new commit?: $IS_EXIST_NEW_COMMIT"
+          run: echo "is_exist_new_commit=$(IS_EXIST_NEW_COMMIT)" >> $GITHUB_OUTPUT
+      - name: if check flag is true, then exit
+        run: |
+          if [ $IS_EXIST_NEW_COMMIT -eq 1 ]; then
+            echo "There is new commit"
+            exit 0
+          else
+            echo "There is no new commit"
+            exit 1
+          fi
