@@ -7,6 +7,8 @@ jobs:
   calculate:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout the source code
+        uses: actions/checkout@v3
       - name: Run cargo release
         run: |
           LATEST_COMMIT_UNIX_TIME=$(git log -1 --format=%ct -- src)
