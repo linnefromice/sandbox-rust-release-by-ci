@@ -34,7 +34,7 @@ jobs:
         with:
           owner: linnefromice
           repo: sandbox-rust-release-by-ci
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAT }}
           workflow_file_name: release.yml
 
 
