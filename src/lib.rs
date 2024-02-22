@@ -14,6 +14,10 @@ pub fn div(left: usize, right: usize) -> usize {
     left / right
 }
 
+pub fn pow(left: usize, right: usize) -> usize {
+    left.pow(right as u32)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -40,5 +44,11 @@ mod tests {
     fn test_div() {
         assert_eq!(div(2, 2), 1);
         assert_eq!(div(4, 3), 1);
+    }
+
+    #[test]
+    fn test_pow() {
+        assert_eq!(pow(2, 0), 1);
+        assert_eq!(pow(3, 3), 27);
     }
 }
