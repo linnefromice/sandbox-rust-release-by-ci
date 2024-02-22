@@ -9,6 +9,8 @@ env:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout the source code
         uses: actions/checkout@v3
