@@ -1,7 +1,8 @@
 name: Check for Version up
 on:
-  schedule:
-    - cron: '*/10 * * * *'
+  # note: make disabled
+  # schedule:
+  #   - cron: '*/10 * * * *'
 env:
   INTERVEL_SEC: 600 # same to cron interval
   TARGET_PATH: src
