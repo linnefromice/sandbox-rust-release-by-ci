@@ -8,7 +8,7 @@ on:
 env:
   RUST_VERSION: 1.76.0
   DEFAULT_RELEASE_LEVEL: patch
-  BRANCH_NAME: topic/patch-version-up
+  BASE_BRANCH_NAME: topic/patch-version-up
   CI_COMMIT_AUTHOR: github-actions
 jobs:
   release:
@@ -39,7 +39,7 @@ jobs:
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           cargo release version --execute --no-confirm ${{ github.event.inputs.level_or_version || env.DEFAULT_RELEASE_LEVEL }}
           PKG_VER=$(cargo metadata --format-version=1 --no-deps | jq ".packages[0].version" | tr -d '"')
-          git checkout -b ${{ env.BRANCH_NAME }}-$PKG_VER
+          git checkout -b ${{ env.BASE_BRANCH_NAME }}-$PKG_VER
           git branch
           cargo release commit --execute --no-confirm
           git push -u origin HEAD
