@@ -33,8 +33,10 @@ jobs:
         run: |
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git checkout -b ${{ env.BRANCH_NAME }}
           cargo release version --execute --no-confirm ${{ env.RELEASE_LEVEL }}
+          PKG_VER=$(cargo metadata --format-version=1 --no-deps | jq ".packages[0].version" | tr -d '"')
+          git checkout -b ${{ env.BRANCH_NAME }}-$PKG_VER
+          git branch
           cargo release commit --execute --no-confirm
           git push -u origin HEAD
           gh pr create --fill
