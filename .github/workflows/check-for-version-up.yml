@@ -1,10 +1,10 @@
 name: Check for Version up
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: '*/10 * * * *'
 env:
-  INTERVEL_SEC: 3600
+  INTERVEL_SEC: 600 # same to cron interval
+  TARGET_PATH: src
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -16,7 +16,7 @@ jobs:
       - name: Check for updates
         id: check
         run: |
-          LATEST_COMMIT=$(git log -1 -- src)
+          LATEST_COMMIT=$((git log -1 -- ${{ env.TARGET_PATH }}))
           echo "Latest Commit: $LATEST_COMMIT"
           LATEST_COMMIT_UNIX_TIME=$(git log -1 --format=%ct -- src)
           CUREENT_TIME=$(date +%s)
