@@ -18,7 +18,7 @@ jobs:
       - name: Check for updates
         id: check
         run: |
-          LATEST_COMMIT=$((git log -1 -- ${{ env.TARGET_PATH }}))
+          LATEST_COMMIT=$(git log -1 -- ${{ env.TARGET_PATH }})
           echo "Latest Commit: $LATEST_COMMIT"
           LATEST_COMMIT_UNIX_TIME=$(git log -1 --format=%ct -- ${{ env.TARGET_PATH }})
           CUREENT_TIME=$(date +%s)
