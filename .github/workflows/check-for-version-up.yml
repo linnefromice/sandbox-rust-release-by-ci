@@ -1,11 +1,12 @@
 name: Check for Version up
 on:
+  workflow_dispatch:
   # note: make disabled
   # schedule:
   #   - cron: '*/10 * * * *'
 env:
   INTERVEL_SEC: 600 # same to cron interval
-  TARGET_PATH: src
+  TARGET_PATH: src .gitignore
 jobs:
   check:
     runs-on: ubuntu-latest
