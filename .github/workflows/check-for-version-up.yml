@@ -1,6 +1,5 @@
 name: Check for Version up
 on:
-  workflow_dispatch:
   # note: make disabled
   # schedule:
   #   - cron: '*/10 * * * *'
